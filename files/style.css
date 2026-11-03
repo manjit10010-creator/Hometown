@@ -2,8 +2,6 @@
    BHAGALPUR — comic-book themed stylesheet
    ============================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Bangers&family=Comic+Neue:wght@400;700&family=Kalam:wght@400;700&display=swap');
-
 @font-face{
   font-family: "Shivaraja";
   src: url("Shivaraja.ttf");
@@ -51,12 +49,12 @@ h1, h2, h3, .display{
 }
 
 a{ color: var(--blue); }
-a:focus-visible, button:focus-visible, .nav a:focus-visible{
+a:focus-visible, button:focus-visible, nav.tabs a:focus-visible{
   outline: 3px dashed var(--ink);
   outline-offset: 3px;
 }
 
-img{ max-width: 100%; display:block; }
+img{ max-width: 100%; height: auto; display:block; }
 
 /* ---------- layout shell ---------- */
 .page-wrap{
@@ -410,3 +408,64 @@ footer.site-footer{
   border: 0;
   display: block;
 }
+
+/* ---------- respect visitors who prefer less motion ---------- */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    transition: none !important;
+    animation: none !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ---------- card action link ---------- */
+.card:focus-within{ transform: translate(-3px,-3px); }
+/* cards that have a button: stack content and pin the button to the bottom */
+.card:has(> .card-link){ display: flex; flex-direction: column; }
+.card:has(> .card-link) > :nth-last-child(2){ margin-bottom: 14px; }
+.card-link{
+  align-self: flex-start;
+  margin-top: auto;
+  display: inline-block;
+  padding: 6px 14px;
+  font-family: 'Bangers', cursive;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  background: var(--yellow);
+  border: 3px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  text-decoration: none;
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.card-link:hover{
+  transform: translate(-2px,-2px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+
+/* ---------- expandable (read more) sections ---------- */
+.more{ clear: both; margin-top: 18px; }
+.more > summary{
+  display: inline-block;
+  cursor: pointer;
+  list-style: none;
+  padding: 6px 14px;
+  font-family: 'Bangers', cursive;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  background: var(--yellow);
+  border: 3px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.more > summary::-webkit-details-marker{ display: none; }
+.more > summary::before{ content: "\25B6\00a0"; }
+.more[open] > summary::before{ content: "\25BC\00a0"; }
+.more > summary:hover{
+  transform: translate(-2px,-2px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+.more > summary:focus-visible{
+  outline: 3px dashed var(--ink);
+  outline-offset: 3px;
+}
+.more[open] > summary{ margin-bottom: 16px; }
