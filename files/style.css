@@ -441,3 +441,31 @@ footer.site-footer{
   transform: translate(-2px,-2px);
   box-shadow: 5px 5px 0 var(--ink);
 }
+
+/* ---------- expandable (read more) sections ---------- */
+.more{ clear: both; margin-top: 18px; }
+.more > summary{
+  display: inline-block;
+  cursor: pointer;
+  list-style: none;
+  padding: 6px 14px;
+  font-family: 'Bangers', cursive;
+  letter-spacing: 0.04em;
+  color: var(--ink);
+  background: var(--yellow);
+  border: 3px solid var(--ink);
+  box-shadow: 3px 3px 0 var(--ink);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+.more > summary::-webkit-details-marker{ display: none; }
+.more > summary::before{ content: "\25B6\00a0"; }
+.more[open] > summary::before{ content: "\25BC\00a0"; }
+.more > summary:hover{
+  transform: translate(-2px,-2px);
+  box-shadow: 5px 5px 0 var(--ink);
+}
+.more > summary:focus-visible{
+  outline: 3px dashed var(--ink);
+  outline-offset: 3px;
+}
+.more[open] > summary{ margin-bottom: 16px; }
